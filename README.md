@@ -63,6 +63,10 @@ $ bash script/make_triple.sh
 $ bash script/run.sh
 ```
 
+# Possible issues
+
+It could be that tarql does not recognise the first column of the dataset, in this case you make an extra column at the left (like is done with `buffer`)
+
 # Credits
 
 If you use it, please cite TARQL properly https://tarql.github.io/
