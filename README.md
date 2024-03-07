@@ -2,7 +2,8 @@
 
 # Introduction
 
-Suppose you have a table and you want to find the overlapping records based on `start` and `end` position.
+Suppose you have a table and you want to find the overlapping records based on
+`start` and `end` position.
 
 | start | end  | name |
 | ----- | ---- | ---- |
@@ -13,11 +14,12 @@ Suppose you have a table and you want to find the overlapping records based on `
 | 101   | 500  | e    |
 | 200   | 300  | f    |
 
-But it has like 20000 rows or something. Then it might be a better option to use a professional database to find the overlaps.
+But it has like 20000 rows or something. Then it might be a better option to
+use a professional database to find the overlaps.
 
 Finding overlaps with a sparql query.
 
-```sparql 
+```sparql
 PREFIX schema: <http://schema.org/>
 PREFIX base: <http://example.org/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -35,7 +37,8 @@ SELECT ?x_name ?y_name ?x_summary ?y_summary WHERE {
   ?y base:start ?y_start .
   ?y base:end ?y_end .
   
-  FILTER(?x_start > ?y_start && ?x_end < ?y_end) .
+  # https://stackoverflow.com/a/35754308/15753558
+  FILTER((?x_end >= ?y_end && ?x_start <= ?y_end)).
   BIND(CONCAT(STR(?x_start), "-", STR(?x_end)) as ?x_summary) .
   BIND(CONCAT(STR(?y_start), "-", STR(?y_end)) as ?y_summary) .
   
